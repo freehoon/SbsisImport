@@ -10,7 +10,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class SbsisInfoCSVToDB {
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        String filePath = "/Users/freehoon/Documents/sbsis/sbsis_201903_01.csv";
+        String filePath = "D:\\소상공 데이터\\소상공인시장진흥공단_상가업소정보_201903\\소상공인시장진흥공단_상가업소정보_201903_01.csv";
 
         List<SbsisDTO> lists = commonCSV(filePath);
 
@@ -38,7 +38,7 @@ public class SbsisInfoCSVToDB {
         for(CSVRecord record : records){
             SbsisDTO dto = new SbsisDTO();
             dto.setBizseId(record.get(0));
-            dto.setBizseNm(record.get(1));
+            dto.setBizseNm(record.get(1).replace("\'", "\\\'"));
             dto.setBrchNm(record.get(2));
             dto.setIndsLclsCd(record.get(3));
             dto.setIndsLclsNm(record.get(4));
@@ -67,7 +67,7 @@ public class SbsisInfoCSVToDB {
             dto.setBldMnno(record.get(27));
             dto.setBldSlno(record.get(28));
             dto.setBldMngNo(record.get(29));
-            dto.setBldNm(record.get(30));
+            dto.setBldNm(record.get(30).replace("\'", "\\\'"));
             dto.setRdnmAdr(record.get(31));
             dto.setOldZipcd(record.get(32));
             dto.setNewZipcd(record.get(33));
