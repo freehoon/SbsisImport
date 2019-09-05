@@ -75,13 +75,13 @@ public class SbsisDAO {
 
             cnt++;
 
-            if(cnt == 99 || !iter.hasNext())
+            if(cnt == 4999 || !iter.hasNext())
                 strSql.append(";");
             else
                 strSql.append(",");
 
 
-            if(cnt == 99 || !iter.hasNext()){
+            if(cnt == 4999 || !iter.hasNext()){
                 System.out.println(strSql);
                 try{
                     Class.forName(JDBC_DRIVER);
