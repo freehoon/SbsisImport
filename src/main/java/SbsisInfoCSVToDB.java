@@ -10,12 +10,12 @@ import org.apache.commons.csv.CSVRecord;
 
 public class SbsisInfoCSVToDB {
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        String filePath = "D:\\소상공 데이터\\소상공인시장진흥공단_상가업소정보_201906\\sbsis_201906_01.csv";
-
+        String filePath = "/Users/freehoon/Documents/sbsis_201912/sbsis_201912_4.csv";
+       // String filePath = "/Users/freehoon/Downloads/storage_201912/storage_201912_222.csv";
         List<SbsisDTO> lists = commonCSV(filePath);
 
-        System.out.println(lists.get(0));
-        System.out.println(lists.get(1));
+    //    System.out.println(lists.get(0));
+    //    System.out.println(lists.get(1));
 
         SbsisDAO dao = new SbsisDAO();
         lists.remove(0);
@@ -44,6 +44,16 @@ public class SbsisInfoCSVToDB {
             String bldNm = record.get(30).replace("\\", "\\\\");
             bldNm = bldNm.replace("\'", "\\\'");
 
+            String lnoCd = record.get(19).replace("\"", "");
+
+            String bldMngNo = record.get(29).replace("\"", "");
+
+            String newZipcd = record.get(33).replace("\"", "");
+
+            String lon = record.get(37).replace("\"", "");
+
+            String lat = record.get(38).replace("\"", "");
+
             dto.setBizseId(record.get(0));
             dto.setBizseNm(bizseNm);
             dto.setBrchNm(record.get(2));
@@ -63,26 +73,31 @@ public class SbsisInfoCSVToDB {
             dto.setAdongNm(record.get(16));
             dto.setLdongCd(record.get(17));
             dto.setLdongNm(record.get(18));
-            dto.setLnoCd(record.get(19));
+            //dto.setLnoCd(record.get(19));
+            dto.setLnoCd(lnoCd);
             dto.setPlotSctCd(record.get(20));
             dto.setPlotSctNm(record.get(21));
             dto.setLnoMnno(record.get(22));
             dto.setLnoSlno(record.get(23));
             dto.setLnoAdr(record.get(24));
-            dto.setRdnmCd(record.get(25));
+            dto.setRdnmCd(record.get(25).toString() + "");
             dto.setRdnm(record.get(26));
             dto.setBldMnno(record.get(27));
             dto.setBldSlno(record.get(28));
-            dto.setBldMngNo(record.get(29));
+            //dto.setBldMngNo(record.get(29));
+            dto.setBldMngNo(bldMngNo);
             dto.setBldNm(bldNm);
             dto.setRdnmAdr(record.get(31));
             dto.setOldZipcd(record.get(32));
-            dto.setNewZipcd(record.get(33));
+            //dto.setNewZipcd(record.get(33));
+            dto.setNewZipcd(newZipcd);
             dto.setDongNo(record.get(34));
             dto.setFlrNo(record.get(35));
             dto.setHoNo(record.get(36));
-            dto.setLon(record.get(37));
-            dto.setLat(record.get(38));
+            dto.setLon(lon);
+            dto.setLat(lat);
+            dto.setFclty_loc(lon + " " + lat);
+            //dto.setLat(record.get(39));
 
             lists.add(dto);
         //    i++;
@@ -91,7 +106,7 @@ public class SbsisInfoCSVToDB {
         System.out.println("CSV parse end....");
 
         long end = System.currentTimeMillis();
-        System.out.println("실행시간 : " + (end - start)/1000 + " 초");
+        System.out.println("CSV 파일 읽는데 걸린 시간 : " + (end - start)/1000 + " 초");
 
         return lists;
     }

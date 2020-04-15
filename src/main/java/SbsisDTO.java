@@ -118,4 +118,7 @@ public class SbsisDTO {
 
     // 39. 위도
     String lat;
+
+    // 40. 경도위도
+    String fclty_loc;
 }

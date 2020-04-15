@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SbsisDAO {
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    static final String DB_URL = "jdbc:mariadb://localhost:3306/yogi?useSSL=false";
+    static final String DB_URL = "jdbc:mariadb://localhost:3306/table_Name?useSSL=false";
     static final String USERNAME = "root";
     static final String PASSWORD = "qwerqwer";
 
@@ -26,9 +26,11 @@ public class SbsisDAO {
 
     public void insertSbsisInfo(List<SbsisDTO> lists) throws InterruptedException {
         System.out.println("DB insert start....");
+        long start = System.currentTimeMillis();
+
         Iterator iter = lists.iterator();
         StringBuilder strSql = new StringBuilder();
-        strSql.append("INSERT INTO storageOrigin (bizesId, bizesNm, brchNm, indsLclsCd, indsLclsNm, indsMclsCd, indsMclsNm, indsSclsCd, indsSclsNm, ksicCd, ksicNm, ctprvnCd, ctprvnNm, signguCd, signguNm, adongCd, adongNm, ldongCd, ldongNm, lnoCd, plotSctCd, plotSctNm, lnoMnno, lnoSlno, lnoAdr, rdnmCd, rdnm, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat) VALUES");
+        strSql.append("INSERT INTO storage3 (bizesId, bizesNm, brchNm, indsLclsCd, indsMclsCd, indsSclsCd, ksicCd, ctprvnCd, signguCd, adongCd, ldongCd, lnoCd, plotSctCd, lnoMnno, lnoSlno, lnoAdr, rdnm, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat, fclty_loc) VALUES");
         int cnt = 0;
         while(iter.hasNext()){
             SbsisDTO dto = (SbsisDTO) iter.next();
@@ -37,28 +39,28 @@ public class SbsisDAO {
             strSql.append( "'" + dto.getBizseNm() + "',");
             strSql.append( "'" + dto.getBrchNm() + "',");
             strSql.append( "'" + dto.getIndsLclsCd() + "',");
-            strSql.append( "'" + dto.getIndsLclsNm() + "',");
+            //strSql.append( "'" + dto.getIndsLclsNm() + "',");
             strSql.append( "'" + dto.getIndsMclsCd() + "',");
-            strSql.append( "'" + dto.getIndsMclsNm() + "',");
+            //strSql.append( "'" + dto.getIndsMclsNm() + "',");
             strSql.append( "'" + dto.getIndsSclsCd() + "',");
-            strSql.append( "'" + dto.getIndsSclsNm() + "',");
+            //strSql.append( "'" + dto.getIndsSclsNm() + "',");
             strSql.append( "'" + dto.getKsicCd() + "',");
-            strSql.append( "'" + dto.getKsicNm() + "',");
+            //strSql.append( "'" + dto.getKsicNm() + "',");
             strSql.append( "'" + dto.getCtprvnCd() + "',");
-            strSql.append( "'" + dto.getCtprvnNm() + "',");
+            //strSql.append( "'" + dto.getCtprvnNm() + "',");
             strSql.append( "'" + dto.getSignguCd() + "',");
-            strSql.append( "'" + dto.getSignguNm() + "',");
+            //strSql.append( "'" + dto.getSignguNm() + "',");
             strSql.append( "'" + dto.getAdongCd() + "',");
-            strSql.append( "'" + dto.getAdongNm() + "',");
+            //strSql.append( "'" + dto.getAdongNm() + "',");
             strSql.append( "'" + dto.getLdongCd() + "',");
-            strSql.append( "'" + dto.getLdongNm() + "',");
+            //strSql.append( "'" + dto.getLdongNm() + "',");
             strSql.append( "'" + dto.getLnoCd() + "',");
             strSql.append( "'" + dto.getPlotSctCd() + "',");
-            strSql.append( "'" + dto.getPlotSctNm() + "',");
+            //strSql.append( "'" + dto.getPlotSctNm() + "',");
             strSql.append( "'" + dto.getLnoMnno() + "',");
             strSql.append( "'" + dto.getLnoSlno() + "',");
             strSql.append( "'" + dto.getLnoAdr() + "',");
-            strSql.append( "'" + dto.getRdnmCd() + "',");
+            //strSql.append( "'" + dto.getRdnmCd() + "',");
             strSql.append( "'" + dto.getRdnm() + "',");
             strSql.append( "'" + dto.getBldMnno() + "',");
             strSql.append( "'" + dto.getBldSlno() + "',");
@@ -71,7 +73,8 @@ public class SbsisDAO {
             strSql.append( "'" + dto.getFlrNo() + "',");
             strSql.append( "'" + dto.getHoNo() + "',");
             strSql.append( "'" + dto.getLon() + "',");
-            strSql.append( "'" + dto.getLat() + "')");
+            strSql.append( "'" + dto.getLat() + "',");
+            strSql.append( "ST_GeomFromText('point(" + dto.getFclty_loc() + ")'))");
 
             cnt++;
 
@@ -96,9 +99,9 @@ public class SbsisDAO {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                Thread.sleep(1000);
+                Thread.sleep(3000);
                 strSql.setLength(0);
-                strSql.append("INSERT INTO storageOrigin (bizesId, bizesNm, brchNm, indsLclsCd, indsLclsNm, indsMclsCd, indsMclsNm, indsSclsCd, indsSclsNm, ksicCd, ksicNm, ctprvnCd, ctprvnNm, signguCd, signguNm, adongCd, adongNm, ldongCd, ldongNm, lnoCd, plotSctCd, plotSctNm, lnoMnno, lnoSlno, lnoAdr, rdnmCd, rdnm, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat) VALUES");
+                strSql.append("INSERT INTO storage3 (bizesId, bizesNm, brchNm, indsLclsCd, indsMclsCd, indsSclsCd, ksicCd, ctprvnCd, signguCd, adongCd, ldongCd, lnoCd, plotSctCd, lnoMnno, lnoSlno, lnoAdr, rdnm, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat, fclty_loc) VALUES");
                 cnt = 0;
 
             }
@@ -108,5 +111,7 @@ public class SbsisDAO {
 
 
         System.out.println("DB insert end....");
+        long end = System.currentTimeMillis();
+        System.out.println("DB 입력에 걸린 시간 : " + (end - start)/1000 + " 초");
     }
 }
