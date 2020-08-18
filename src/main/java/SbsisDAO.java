@@ -30,7 +30,7 @@ public class SbsisDAO {
 
         Iterator iter = lists.iterator();
         StringBuilder strSql = new StringBuilder();
-        strSql.append("INSERT INTO storage3 (bizesId, bizesNm, brchNm, indsLclsCd, indsMclsCd, indsSclsCd, ksicCd, ctprvnCd, signguCd, adongCd, ldongCd, lnoCd, plotSctCd, lnoMnno, lnoSlno, lnoAdr, rdnm, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat, fclty_loc) VALUES");
+        strSql.append("INSERT INTO storage3 (bizesId, bizesNm, brchNm, indsLclsCd, indsMclsCd, indsSclsCd, ksicCd, ctprvnCd, signguCd, adongCd, ldongCd, lnoCd, plotSctCd, lnoMnno, lnoSlno, lnoAdr, rdnmcd, bldMnno, bldSlno, bldMngNo, bldNm, rdnmAdr, oldZipcd, newZipcd, dongNo, flrNo, hoNo, lon, lat, fclty_loc) VALUES");
         int cnt = 0;
         while(iter.hasNext()){
             SbsisDTO dto = (SbsisDTO) iter.next();
@@ -60,8 +60,8 @@ public class SbsisDAO {
             strSql.append( "'" + dto.getLnoMnno() + "',");
             strSql.append( "'" + dto.getLnoSlno() + "',");
             strSql.append( "'" + dto.getLnoAdr() + "',");
-            //strSql.append( "'" + dto.getRdnmCd() + "',");
-            strSql.append( "'" + dto.getRdnm() + "',");
+            strSql.append( "'" + dto.getRdnmCd() + "',");
+            //strSql.append( "'" + dto.getRdnm() + "',");
             strSql.append( "'" + dto.getBldMnno() + "',");
             strSql.append( "'" + dto.getBldSlno() + "',");
             strSql.append( "'" + dto.getBldMngNo() + "',");
