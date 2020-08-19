@@ -10,7 +10,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class SbsisInfoCSVToDB {
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        String filePath = "/Users/freehoon/Documents/sbsis_201912/sbsis_201912_4.csv";
+        String filePath = "/Users/freehoon/Documents/sbsis_201912/sbsis_201912_1.csv";
        // String filePath = "/Users/freehoon/Downloads/storage_201912/storage_201912_222.csv";
         List<SbsisDTO> lists = commonCSV(filePath);
 
