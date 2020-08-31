@@ -11,10 +11,10 @@ import org.apache.commons.csv.CSVRecord;
 
 public class SbsisInfoCSVToDB {
     public static void main(String[] args) throws IOException, SQLException, InterruptedException {
-        String filePath = "/Users/freehoon/Documents/sbsis_201912/sbsis_201912_5.csv";
+        String filePath = "/Users/freehoon/Documents/sbsis_201912/sbsis_201912_4.csv";
        // String filePath = "/Users/freehoon/Downloads/storage_201912/storage_201912_222.csv";
-        //List<SbsisDTO> lists = commonCSV1(filePath);
-        List<SbsisDTO> lists = commonCSV2(filePath);
+        List<SbsisDTO> lists = commonCSV1(filePath);
+        //List<SbsisDTO> lists = commonCSV2(filePath);
 
     //    System.out.println(lists.get(0));
     //    System.out.println(lists.get(1));
@@ -34,19 +34,19 @@ public class SbsisInfoCSVToDB {
 
         CSVReader csvReader = new CSVReader(new FileReader(filePath));
         List<String[]> lists = csvReader.readAll();//new ArrayList<>();
-        SbsisDTO dto = null;
+        SbsisDTO dto;
         List<SbsisDTO> sbsisDTOList = new ArrayList<>();
 
         for(String[] list : lists){
             String bizseNm = list[1].replace("\\", "\\\\");
-            bizseNm = bizseNm.replace("\'", "\\\'");
+            bizseNm = bizseNm.replace("'", "\\'");
 
             String lnoCd = list[19].replace("\"", "");
 
             String bldMngNo = list[29].replace("\"", "");
 
             String bldNm = list[30].replace("\\", "\\\\");
-            bldNm = bldNm.replace("\'", "\\\'");
+            bldNm = bldNm.replace("'", "\\'");
 
             String newZipcd = list[33].replace("\"", "");
 
@@ -81,7 +81,7 @@ public class SbsisInfoCSVToDB {
             dto.setLnoMnno(list[22]);
             dto.setLnoSlno(list[23]);
             dto.setLnoAdr(list[24]);
-            dto.setRdnmCd(list[25].toString() + "");
+            dto.setRdnmCd(list[25] + "");
             dto.setRdnm(list[26]);
             dto.setBldMnno(list[27]);
             dto.setBldSlno(list[28]);
@@ -142,7 +142,7 @@ public class SbsisInfoCSVToDB {
         long start = System.currentTimeMillis();
 
         Reader in = new FileReader(filePath);
-        List<SbsisDTO> lists = new ArrayList<SbsisDTO>();
+        List<SbsisDTO> lists = new ArrayList<>();
 
         Iterable<CSVRecord> records = CSVFormat.RFC4180.parse(in);
      //   int i = 0;
@@ -150,10 +150,10 @@ public class SbsisInfoCSVToDB {
             SbsisDTO dto = new SbsisDTO();
 
             String bizseNm = record.get(1).replace("\\", "\\\\");
-            bizseNm = bizseNm.replace("\'", "\\\'");
+            bizseNm = bizseNm.replace("'", "\\'");
 
             String bldNm = record.get(30).replace("\\", "\\\\");
-            bldNm = bldNm.replace("\'", "\\\'");
+            bldNm = bldNm.replace("'", "\\'");
 
             String lnoCd = record.get(19).replace("\"", "");
 
@@ -191,7 +191,7 @@ public class SbsisInfoCSVToDB {
             dto.setLnoMnno(record.get(22));
             dto.setLnoSlno(record.get(23));
             dto.setLnoAdr(record.get(24));
-            dto.setRdnmCd(record.get(25).toString() + "");
+            dto.setRdnmCd(record.get(25) + "");
             dto.setRdnm(record.get(26));
             dto.setBldMnno(record.get(27));
             dto.setBldSlno(record.get(28));
